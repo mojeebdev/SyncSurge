@@ -7,7 +7,7 @@ import toast from 'react-hot-toast'
 import { ArrowLeft, Send, CheckCircle, Clock, ExternalLink } from 'lucide-react'
 import { Payment } from '@/types'
 
-interface PaymentWithRelations extends Payment {
+interface PaymentWithRelations extends Omit<Payment, 'profiles'> {
   profiles: { name: string; email: string; username: string | null; wallet_address: string | null } | null
 }
 
