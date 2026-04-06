@@ -29,11 +29,12 @@ export default function LoginPage() {
       })
       if (result?.error) {
         toast.error('Invalid email or password')
-      } else {
-        toast.success('Welcome back!')
-        router.push('/dashboard')
-        router.refresh()
+        return
       }
+      toast.success('Welcome back!')
+      const session = await fetch('/api/auth/session').then((r) => r.json())
+      router.push(session?.user?.role === 'admin' ? '/admin/dashboard' : '/dashboard')
+      router.refresh()
     } catch {
       toast.error('Something went wrong. Please try again.')
     } finally {
@@ -44,7 +45,6 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-bg-primary flex items-center justify-center px-4">
       <div className="w-full max-w-md animate-fade-in">
-        {/* Logo */}
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-2 mb-6">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-accent-purple to-accent-cyan flex items-center justify-center">
@@ -56,10 +56,8 @@ export default function LoginPage() {
           <p className="text-gray-400 mt-1 text-sm">Sign in to your account</p>
         </div>
 
-        {/* Card */}
         <div className="bg-bg-card border border-border rounded-2xl p-8">
           <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Email */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-300">
                 Email address
@@ -78,7 +76,6 @@ export default function LoginPage() {
               </div>
             </div>
 
-            {/* Password */}
             <div>
               <label htmlFor="password" className="block text-sm font-medium mb-2 text-gray-300">
                 Password
@@ -104,7 +101,6 @@ export default function LoginPage() {
               </div>
             </div>
 
-            {/* Submit */}
             <button
               type="submit"
               disabled={loading}

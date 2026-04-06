@@ -55,15 +55,12 @@ export default function CreatorTable({ creators }: Props) {
 
               return (
                 <tr key={creator.id} className="border-b border-border/50 last:border-0 hover:bg-bg-secondary/50 transition-colors">
-                  {/* Creator info */}
                   <td className="px-5 py-4">
                     <div>
                       <p className="font-medium text-white">{creator.name || 'Unnamed'}</p>
                       <p className="text-gray-500 text-xs mt-0.5">{creator.email}</p>
                     </div>
                   </td>
-
-                  {/* Socials */}
                   <td className="px-4 py-4 hidden sm:table-cell">
                     <div className="flex flex-col gap-1">
                       {creator.x_handle && (
@@ -83,8 +80,6 @@ export default function CreatorTable({ creators }: Props) {
                       )}
                     </div>
                   </td>
-
-                  {/* Today's status */}
                   <td className="px-4 py-4">
                     {todayEntry ? (
                       <div className="flex items-center gap-2">
@@ -108,8 +103,6 @@ export default function CreatorTable({ creators }: Props) {
                       <span className="text-gray-600 text-xs">Not logged</span>
                     )}
                   </td>
-
-                  {/* Pending payments */}
                   <td className="px-4 py-4 hidden md:table-cell">
                     {pendingCount > 0 ? (
                       <span className="bg-yellow-400/10 text-yellow-400 text-xs px-2.5 py-1 rounded-full font-medium">
@@ -119,13 +112,9 @@ export default function CreatorTable({ creators }: Props) {
                       <span className="text-gray-600 text-xs">None</span>
                     )}
                   </td>
-
-                  {/* Joined */}
                   <td className="px-4 py-4 hidden lg:table-cell text-gray-500 text-xs">
                     {format(parseISO(creator.created_at), 'MMM d, yyyy')}
                   </td>
-
-                  {/* Action */}
                   <td className="px-4 py-4">
                     <Link
                       href={`/admin/creators/${creator.username}`}
