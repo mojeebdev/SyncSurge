@@ -6,6 +6,8 @@ export default withAuth(
     const token = req.nextauth.token
     const { pathname } = req.nextUrl
 
+    console.log('middleware token:', JSON.stringify(token))
+
     // Admin route protection
     if (pathname.startsWith('/admin')) {
       if (token?.role !== 'admin') {
@@ -19,7 +21,6 @@ export default withAuth(
     callbacks: {
       authorized: ({ token, req }) => {
         const { pathname } = req.nextUrl
-        // Public routes
         if (
           pathname === '/' ||
           pathname.startsWith('/login') ||
